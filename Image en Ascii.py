@@ -67,8 +67,6 @@ def image_to_ascii(fichier, gris_choix):
     return(image_texte)
 
 def main():
-    #yassine
-    
     #nom_image = input("Tapez le nom de l'image à transformer (avec l'extension): ")
     choix = input("Voulez vous utiliser le dossier par défaut (1) ou changer le dossier par défaut? (2): ")
     if choix == "2":
