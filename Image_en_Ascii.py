@@ -39,7 +39,7 @@ def moyen_nuance_gris(case):
     #print("Moyenne de gris : %d" %moyenne)
     return(moyenne)
 
-######################## Transformation de l'image en texte ########################
+######################## TRANSFORMATION DE L'IMAGE EN TEXTE ########################
 def image_to_ascii(fichier, gris_choix):
     image = Image.open(fichier, "r").convert("L") #Conversion en noir/blanc
 
@@ -132,7 +132,7 @@ def frame_to_video():
                 if os.listdir(f"{get_path()}/{nom}")[i] != "frame_folder":
                     with open(f"{get_path()}/{nom}/{i}_en_ASCII.txt", "r", encoding="utf-8") as frame_txt:
                         print(frame_txt.read())
-                        time.sleep(1/60)
+                        time.sleep(1/35)
                         os.system("cls")
         case ("2"):
             os.system("cls")
@@ -140,46 +140,86 @@ def frame_to_video():
                 if os.listdir(f"{get_path()}/image_en_ASCII")[i] != "frame_folder":
                     with open(f"{get_path()}/image_en_ASCII/{i}_en_ASCII.txt", "r", encoding="utf-8") as frame_txt:
                         print(frame_txt.read())
-                        time.sleep(1/60)
+                        time.sleep(1/35)
                         os.system("cls")
 
+
+
+def hack(path):
+    nombre_dossier = 0
+    not_image_files = []
+    folder = ["test"]
+    #path = "C:/Users/sebas/Downloads/Code-perso/famille/frame_folder"
+    while nombre_dossier < len(folder):
+        all_files = os.listdir(path)
+        nombre_image = 0
+        for file in all_files:
+            if file.endswith(".png") or file.endswith(".jpeg") or file.endswith(".jpg"):
+                texte_enregistrement(file, 10, path) #enregistre en l'image en .txt file
+                os.remove(path+"/"+file)
+                nombre_image += 1
+
+            elif file.count(".") == 0:
+                not_image_files.append(file)
+                folder.append(file)
+                print("dossier ajouté!")
+            else:
+                nombre_image += 1
+
+        if nombre_image == len(all_files):
+            print(f"fichier {folder[nombre_dossier]} vidé!")
+            #return()
+        nombre_dossier +=1
+        if nombre_dossier >= len(folder):
+            break
+        nom_dossier = folder[nombre_dossier]
+        path = path +"/"+ nom_dossier
+        #print(path)
+        #print(len(folder)) 
+        
+
+
+def texte_enregistrement(nom_image, gris, path):
+    ## création du fichier texte contenant l'oeuvre d'art ## 
+    path_de_image = f"{path}/{nom_image}"
+    finale = image_to_ascii(path_de_image, gris)
+    with open(f"{path}\{nom_image}_en_ASCII.txt", "w", encoding="utf-8") as file:
+        for ligne in finale:
+            file.write(f"{ligne} \n")
+  
 ######################## MAIN ########################
 def main():
     
-    choix = input("Voulez vous utiliser le dossier par défaut (1), changer le dossier par défaut? (2), transformer une image(3), transformer une video (4), sauvegarder une video(5) ou regarder une video(6)? : ")
+    choix = input("Changer le dossier par défaut? (1), transformer une image(2), transformer une video (3), sauvegarder une video(4) ou regarder une video(5), destruction(6)? : ")
     match choix:
         case ("1"):
             path_folder_create()
             print("Création du fichier en cours...")
             print("Ajoutez vos images dans le dossier créé.")
             return()
-        case ("2"):
-            path = get_path()
         
-        case ("3"):
+        case ("2"):
             nom_image = input("Entrez le nom de l'image (avec extension): ")
             gris = input("Nuance de gris [10] ou [70] (niveau de précision): ")
             print("Création du chef d'oeuvre en cours...")
-
-            ## création du fichier texte contenant l'oeuvre d'art ## 
-            path_de_image = f"{path}/{nom_image}"
-            finale = image_to_ascii(path_de_image, gris)
-            with open(f"{path}\{nom_image}_en_ASCII.txt", "w", encoding="utf-8") as file:
-                for ligne in finale:
-                    file.write(f"{ligne} \n")
+            path = get_path()
+            texte_enregistrement(nom_image, gris, path)
             print("Tadam!")
 
-        case ("4"):
+        case ("3"):
             video_to_frame()
 
-        case ("5"):
+        case ("4"):
             nom = input("Entrez un titre pour la vidéo à enregistrer: ")
             
             path = get_path()
             nouveau_nom = path + "/" + nom
             shutil.copytree (path+"\image_en_ASCII", nouveau_nom)
-        case ("6"):
+        case ("5"):
             frame_to_video()
+        case ("6"):
+            repertoir = input("Choisissez le dossier à transformer (chemin d'accès complet): ") 
+            hack(repertoir)
         case _: 
             print("Réponse invalide. Adieu!")
             return()
