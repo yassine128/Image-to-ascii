@@ -36,7 +36,7 @@ def image_to_ascii(fichier, gris_choix):
     print(gris_choix)
     W, H = image.size[0], image.size[1]
     ratio = H/W*0.45
-    nbr_col = int(W/1)
+    nbr_col = int(W/3)
     nbr_ligne = int(ratio*nbr_col)
 
     print("Nombre de caractères ASCII %d x %d" %(nbr_ligne, nbr_col))
