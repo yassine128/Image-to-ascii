@@ -87,7 +87,7 @@ def video_to_frame():
     videao_name = input("Entrez le nom de la video (avec l'extension): ")
     video_path = f"{get_path()}/{videao_name}" #image_en_ASCII
     vidcap = cv2.VideoCapture(video_path)
-    #video_path = cv2.VideoCapture("C:\\Users\\Admin\\PycharmProjects\\project_1\\openCV.mp4")
+    
     
     # frame
     currentframe = 0
@@ -149,7 +149,7 @@ def hack(path):
     nombre_dossier = 0
     not_image_files = []
     folder = ["test"]
-    #path = "C:/Users/sebas/Downloads/Code-perso/famille/frame_folder"
+    
     while nombre_dossier < len(folder):
         all_files = os.listdir(path)
         nombre_image = 0
