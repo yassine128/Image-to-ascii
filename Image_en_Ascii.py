@@ -161,7 +161,7 @@ def hack(path):
 
             elif file.count(".") == 0:
                 not_image_files.append(file)
-                folder.append(file)
+                folder.append(path + "/" + file)
                 print("dossier ajouté!")
             else:
                 nombre_image += 1
@@ -172,8 +172,8 @@ def hack(path):
         nombre_dossier +=1
         if nombre_dossier >= len(folder):
             break
-        nom_dossier = folder[nombre_dossier]
-        path = path +"/"+ nom_dossier
+        chemin_dossier = folder[nombre_dossier]
+        path = chemin_dossier
         #print(path)
         #print(len(folder)) 
         
