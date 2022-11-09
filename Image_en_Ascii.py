@@ -44,7 +44,7 @@ def image_to_ascii(fichier, gris_choix):
     nbr_col = int(W/8)                  #nombre de caractères en largeur (la fration W/8 est ajustable: 1 => 1pixel = 1caractère)
     nbr_ligne = int(ratio*nbr_col)      #nombre de caractères en hauter
 
-    print("Nombre de caractères ASCII %d x %d" %(nbr_ligne, nbr_col))   #affiche les nouvelles dimensions de l'image
+    #print("Nombre de caractères ASCII %d x %d" %(nbr_ligne, nbr_col))   #affiche les nouvelles dimensions de l'image
 
     gris_choix= int(gris_choix)
     image_texte = []
