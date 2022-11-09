@@ -1,4 +1,4 @@
-mport numpy as np
+import numpy as np
 from PIL import Image
 import os
 ######################## Reprend le chemin d'accès du dossier à partir du log ########################
